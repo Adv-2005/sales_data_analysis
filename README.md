@@ -32,8 +32,8 @@ sales-analysis/
 
 ```bash
 # 1. Clone and enter the project
-git clone https://github.com/your-username/sales-analysis.git
-cd sales-analysis
+git clone https://github.com/adv-2005/sales_data_analysis.git
+cd sales_data_analysis
 
 # 2. Install dependencies
 pip install -r requirements.txt
