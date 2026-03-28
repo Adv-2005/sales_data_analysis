@@ -32,8 +32,8 @@ sales-analysis/
 
 ```bash
 # 1. Clone and enter the project
-git clone https://github.com/adv-2005/sales_data_analysis.git
-cd sales_data_analysis
+git clone https://github.com/your-username/sales-analysis.git
+cd sales-analysis
 
 # 2. Install dependencies
 pip install -r requirements.txt
@@ -171,3 +171,94 @@ Mention these in interviews to show forward thinking:
 *Built as a portfolio project. Dataset is synthetic but designed to mirror
 real retail sales patterns including seasonality, regional variation, and
 discount behaviour.*
+
+---
+
+## 🚀 Advanced Enhancements
+
+### Enhancement 1 — RFM Customer Segmentation (`src/segmentation.py`)
+
+Scores every customer on **Recency, Frequency, Monetary** using quartile-based cuts (1–4).
+Assigns one of 10 named segments (Champion, Loyal, At Risk, Lost, etc.) with a concrete business action per segment.
+
+**Why quartile scoring?** It adapts to any dataset without hardcoded thresholds. The same logic works on a $100K or $100M dataset.
+
+| Segment | Action |
+|---|---|
+| Champions | Reward — early adopters for new products |
+| At Risk | Personalised reactivation emails |
+| Lost | Win-back campaign or deprioritise |
+| New Customers | Onboard well, first-purchase offers |
+
+Charts: `09_rfm_segmentation.png`, `10_rfm_heatmap.png`
+
+---
+
+### Enhancement 2 — Sales Forecasting (`src/forecasting.py`)
+
+Manual time-series decomposition (no Prophet / ARIMA dependency):
+1. Centred moving average → **trend component**
+2. Detrend → average per calendar month → **seasonal index**
+3. Linear extrapolation of trend × seasonal index → **6-month forecast**
+4. ±1σ residual envelope → **confidence interval**
+
+**Interview answer:** *"I implemented classical multiplicative decomposition from scratch — this shows I understand what Prophet does under the hood. For production I'd add Prophet for better uncertainty quantification."*
+
+Chart: `11_sales_forecast.png`
+
+---
+
+### Enhancement 3 — KPI Tracker with Alerts (`src/kpi_tracker.py`)
+
+Threshold-based GREEN / YELLOW / RED alerting for 5 business KPIs:
+- Monthly Revenue, Avg Order Value, Profit Margin, Order Count, Discount Rate
+
+All thresholds live in `KPI_CONFIG` — business owners can tune without touching code.
+Built to be dropped into an Airflow DAG or cron job for automated daily checks.
+
+Chart: `12_kpi_dashboard.png`
+
+---
+
+### Enhancement 4 — Streamlit Dashboard (`app.py`)
+
+5-tab interactive dashboard with global sidebar filters (year, region, category):
+
+| Tab | Content |
+|---|---|
+| 📊 Overview | KPI cards, region/category charts, YoY comparison |
+| 📈 Trends | Monthly line chart, seasonality bar, heatmap |
+| 🛍️ Products | Top N slider, category table, discount impact |
+| 👥 Segments | RFM scatter, segment action table, Champion vs Lost |
+| 🔮 Forecast & KPIs | Forecast chart + table, KPI status cards + sparklines |
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+---
+
+## 📁 Complete Project Structure (v2)
+
+```
+sales-analysis/
+├── data/
+│   ├── generate_data.py       # Synthetic 12k-row dataset generator
+│   ├── sales_raw.csv          # Raw data (with injected quality issues)
+│   └── sales_clean.csv        # Output of cleaning pipeline
+├── src/
+│   ├── data_cleaning.py       # 7-step modular cleaning pipeline
+│   ├── eda.py                 # 12 EDA functions returning DataFrames
+│   ├── visualization.py       # 8 Matplotlib charts
+│   ├── segmentation.py        # RFM scoring + segment mapping  ← NEW
+│   ├── forecasting.py         # Time-series decomposition       ← NEW
+│   └── kpi_tracker.py         # KPI alerts + history tracking   ← NEW
+├── outputs/
+│   ├── charts/                # 12 PNG charts
+│   └── report.txt             # Auto-generated business report
+├── app.py                     # Streamlit dashboard              ← NEW
+├── run_analysis.py            # Master pipeline (all 7 steps)
+├── requirements.txt
+└── README.md
+```

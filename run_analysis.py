@@ -21,6 +21,9 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 import src.data_cleaning  as cleaning
 import src.eda             as eda
 import src.visualization   as viz
+import src.segmentation    as seg
+import src.forecasting     as fc
+import src.kpi_tracker     as kpi
 
 REPORT_PATH = "outputs/report.txt"
 
@@ -113,6 +116,21 @@ def main():
     for i, ins in enumerate(insights, 1):
         print(f"\n  {ins}")
     write_report(insights, summary, df)
+
+    # Step 5 — RFM Segmentation
+    print("\n[STEP 5] Customer Segmentation (RFM)")
+    print("-" * 40)
+    rfm = seg.run_segmentation(df)
+
+    # Step 6 — Forecasting
+    print("\n[STEP 6] Sales Forecasting")
+    print("-" * 40)
+    fc.run_forecasting(df, periods=6)
+
+    # Step 7 — KPI Tracker
+    print("\n[STEP 7] KPI Monitoring")
+    print("-" * 40)
+    kpi.run_kpi_tracker(df)
 
     elapsed = time.time() - t0
     print(f"\n{'=' * 55}")
