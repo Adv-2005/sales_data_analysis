@@ -1,0 +1,57 @@
+=================================================================
+   SALES DATA ANALYSIS — BUSINESS INSIGHTS REPORT
+=================================================================
+
+── EXECUTIVE SUMMARY ─────────────────────────────────────
+
+  Total Revenue ($)              $5,109,038
+  Total Profit ($)               $1,014,033
+  Total Orders                   11,983
+  Unique Customers               2,935
+  Avg Order Value ($)            $426.36
+  Avg Profit Margin              25.8%
+  Top Category                   Technology
+  Top Region                     East
+
+
+── KEY INSIGHTS & RECOMMENDATIONS ────────────────────────
+
+  ────────────────────────────────────────────────────────────
+  INSIGHT 1 – Peak Month: 'Nov' records the highest average revenue. Recommendation: Scale up inventory, marketing spend, and support staff in the weeks leading up to Nov.
+
+  ────────────────────────────────────────────────────────────
+  INSIGHT 2 – Region Performance: 'East' leads with $1,750,114 in revenue. 'South' is the weakest at $698,455. Recommendation: Investigate low-performing region's logistics and lead generation.
+
+  ────────────────────────────────────────────────────────────
+  INSIGHT 3 – Best Margin Category: 'Office Supplies' has the highest avg profit margin (34.9%). Recommendation: Prioritise this category in upselling and cross-selling campaigns.
+
+  ────────────────────────────────────────────────────────────
+  INSIGHT 4 – Top Product: 'Laptop' generates $1,360,011 revenue across 419 orders. Recommendation: Ensure consistent stock availability and consider bundling.
+
+  ────────────────────────────────────────────────────────────
+  INSIGHT 5 – Discount Impact: Orders with 21–30% discount have 0.1% lower profit margins than non-discounted orders. Recommendation: Cap discounts at 10% unless clearing overstock.
+
+  ────────────────────────────────────────────────────────────
+  INSIGHT 6 – Customer Concentration: Top 10 customers account for 2.7% of total revenue ($139,278). Recommendation: Build a VIP retention programme for these accounts.
+
+  ────────────────────────────────────────────────────────────
+  INSIGHT 7 – YoY Growth: Revenue grew -4.4% from 2023 to 2024. Recommendation: Audit customer churn and pricing strategy.
+
+
+── DISCOUNT IMPACT ANALYSIS ──────────────────────────────
+
+discount_tier  avg_margin  avg_revenue  orders
+  No Discount    0.256901   452.216781    4595
+        5–10%    0.260107   451.119025    3016
+       11–20%    0.258951   380.968414    2920
+       21–30%    0.256382   384.365999    1452
+
+
+── FUTURE ENHANCEMENTS (INTERVIEW TALKING POINTS) ────────
+  1. Streamlit dashboard for real-time interactive exploration
+  2. Prophet / ARIMA time-series forecasting for demand planning
+  3. ML model (XGBoost) for customer churn prediction
+  4. RFM segmentation (Recency, Frequency, Monetary) for CRM
+  5. Automated alerting when regional revenue dips > 15% MoM
+
+=================================================================
